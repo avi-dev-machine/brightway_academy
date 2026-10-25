@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Brightway design system
+ *
+ * Type:    Geist (interface) · Geist Mono (identifiers) · Instrument Serif
+ *          (editorial display, marketing surfaces only).
+ * Colour:  ink + slate neutrals, deep navy for structure, a single cobalt
+ *          accent, and muted semantic colours used only to carry meaning.
+ * Shape:   restrained radii and near-flat surfaces; elevation is reserved for
+ *          overlays.
+ *
+ * Tailwind's default hue scales are remapped here so every route — including
+ * ones that use raw `blue-*`, `indigo-*` or `purple-*` utilities — resolves to
+ * the same restrained palette instead of a dozen competing accents.
+ * ------------------------------------------------------------------------- */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-display: var(--font-instrument-serif), "Iowan Old Style", Georgia, serif;
+
+  /* Neutrals */
+  --color-ink: oklch(0.2 0.012 260);
+  --color-paper: oklch(0.985 0.006 85);
+  --color-ivory: oklch(0.965 0.011 85);
+  --color-rule: oklch(0.915 0.006 260);
+  --color-navy: oklch(0.235 0.045 262);
+  --color-navy-soft: oklch(0.29 0.045 262);
+
+  /* Cobalt — the single accent. `blue` is the canonical scale. */
+  --color-blue-50: oklch(0.972 0.012 262);
+  --color-blue-100: oklch(0.938 0.028 262);
+  --color-blue-200: oklch(0.872 0.056 262);
+  --color-blue-300: oklch(0.772 0.1 262);
+  --color-blue-400: oklch(0.645 0.15 262);
+  --color-blue-500: oklch(0.545 0.18 263);
+  --color-blue-600: oklch(0.475 0.185 264);
+  --color-blue-700: oklch(0.405 0.162 265);
+  --color-blue-800: oklch(0.34 0.13 266);
+  --color-blue-900: oklch(0.28 0.092 267);
+  --color-blue-950: oklch(0.21 0.06 268);
+
+  --color-brand-50: var(--color-blue-50);
+  --color-brand-100: var(--color-blue-100);
+  --color-brand-200: var(--color-blue-200);
+  --color-brand-300: var(--color-blue-300);
+  --color-brand-400: var(--color-blue-400);
+  --color-brand-500: var(--color-blue-500);
+  --color-brand-600: var(--color-blue-600);
+  --color-brand-700: var(--color-blue-700);
+  --color-brand-800: var(--color-blue-800);
+  --color-brand-900: var(--color-blue-900);
+  --color-brand-950: var(--color-blue-950);
+
+  /* Decorative hues collapse into the accent. */
+  --color-indigo-50: var(--color-blue-50);
+  --color-indigo-100: var(--color-blue-100);
+  --color-indigo-200: var(--color-blue-200);
+  --color-indigo-300: var(--color-blue-300);
+  --color-indigo-400: var(--color-blue-400);
+  --color-indigo-500: var(--color-blue-500);
+  --color-indigo-600: var(--color-blue-600);
+  --color-indigo-700: var(--color-blue-700);
+  --color-indigo-800: var(--color-blue-800);
+  --color-indigo-900: var(--color-blue-900);
+  --color-indigo-950: var(--color-blue-950);
+  --color-violet-50: var(--color-blue-50);
+  --color-violet-100: var(--color-blue-100);
+  --color-violet-200: var(--color-blue-200);
+  --color-violet-500: var(--color-blue-500);
+  --color-violet-600: var(--color-blue-600);
+  --color-violet-700: var(--color-blue-700);
+  --color-purple-50: var(--color-blue-50);
+  --color-purple-100: var(--color-blue-100);
+  --color-purple-200: var(--color-blue-200);
+  --color-purple-300: var(--color-blue-300);
+  --color-purple-400: var(--color-blue-400);
+  --color-purple-500: var(--color-blue-500);
+  --color-purple-600: var(--color-blue-600);
+  --color-purple-700: var(--color-blue-700);
+  --color-purple-800: var(--color-blue-800);
+  --color-sky-50: var(--color-blue-50);
+  --color-sky-100: var(--color-blue-100);
+  --color-sky-500: var(--color-blue-500);
+  --color-sky-600: var(--color-blue-600);
+  --color-sky-700: var(--color-blue-700);
+  --color-cyan-50: var(--color-blue-50);
+  --color-cyan-600: var(--color-blue-600);
+  --color-cyan-700: var(--color-blue-700);
+
+  /* Success — a quiet, slightly cool green. */
+  --color-emerald-50: oklch(0.975 0.014 162);
+  --color-emerald-100: oklch(0.948 0.03 162);
+  --color-emerald-200: oklch(0.89 0.058 162);
+  --color-emerald-300: oklch(0.81 0.088 162);
+  --color-emerald-400: oklch(0.7 0.11 162);
+  --color-emerald-500: oklch(0.615 0.12 162);
+  --color-emerald-600: oklch(0.53 0.108 162);
+  --color-emerald-700: oklch(0.45 0.09 163);
+  --color-emerald-800: oklch(0.37 0.072 164);
+  --color-emerald-900: oklch(0.31 0.056 165);
+  --color-emerald-950: oklch(0.22 0.04 165);
+  --color-teal-50: var(--color-emerald-50);
+  --color-teal-100: var(--color-emerald-100);
+  --color-teal-500: var(--color-emerald-500);
+  --color-teal-600: var(--color-emerald-600);
+  --color-teal-700: var(--color-emerald-700);
+  --color-green-50: var(--color-emerald-50);
+  --color-green-100: var(--color-emerald-100);
+  --color-green-600: var(--color-emerald-600);
+  --color-green-700: var(--color-emerald-700);
+
+  /* Error — brick rather than signal red. */
+  --color-rose-50: oklch(0.975 0.012 22);
+  --color-rose-100: oklch(0.945 0.027 22);
+  --color-rose-200: oklch(0.885 0.058 22);
+  --color-rose-300: oklch(0.8 0.1 22);
+  --color-rose-400: oklch(0.7 0.14 23);
+  --color-rose-500: oklch(0.605 0.165 25);
+  --color-rose-600: oklch(0.535 0.165 26);
+  --color-rose-700: oklch(0.465 0.145 26);
+  --color-rose-800: oklch(0.39 0.118 26);
+  --color-rose-900: oklch(0.33 0.09 26);
+  --color-rose-950: oklch(0.22 0.06 26);
+  --color-red-50: var(--color-rose-50);
+  --color-red-100: var(--color-rose-100);
+  --color-red-200: var(--color-rose-200);
+  --color-red-500: var(--color-rose-500);
+  --color-red-600: var(--color-rose-600);
+  --color-red-700: var(--color-rose-700);
+  --color-red-800: var(--color-rose-800);
+
+  /* Warning — ochre. */
+  --color-amber-50: oklch(0.982 0.018 85);
+  --color-amber-100: oklch(0.955 0.042 85);
+  --color-amber-200: oklch(0.905 0.075 83);
+  --color-amber-300: oklch(0.845 0.105 80);
+  --color-amber-400: oklch(0.78 0.125 75);
+  --color-amber-500: oklch(0.72 0.135 70);
+  --color-amber-600: oklch(0.605 0.128 62);
+  --color-amber-700: oklch(0.505 0.108 58);
+  --color-amber-800: oklch(0.425 0.088 56);
+  --color-amber-900: oklch(0.36 0.07 55);
+  --color-orange-50: var(--color-amber-50);
+  --color-orange-100: var(--color-amber-100);
+  --color-orange-600: var(--color-amber-600);
+  --color-orange-700: var(--color-amber-700);
+  --color-yellow-50: var(--color-amber-50);
+  --color-yellow-100: var(--color-amber-100);
+  --color-yellow-600: var(--color-amber-600);
+  --color-yellow-700: var(--color-amber-700);
+
+  /* Geometry: deliberate, not pill-shaped. */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
+  --radius-3xl: 12px;
+
+  /* Elevation is reserved for overlays; surfaces stay near-flat. */
+  --shadow-2xs: 0 1px 0 0 rgb(15 23 42 / 0.03);
+  --shadow-xs: 0 1px 1px 0 rgb(15 23 42 / 0.04);
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-md: 0 2px 6px -1px rgb(15 23 42 / 0.07), 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-lg: 0 10px 24px -10px rgb(15 23 42 / 0.16), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-xl: 0 18px 44px -14px rgb(15 23 42 / 0.22), 0 4px 8px -4px rgb(15 23 42 / 0.06);
+  --shadow-2xl: var(--shadow-xl);
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --animate-fade-in: fade-in 160ms ease-out both;
+  --animate-rise: rise 280ms var(--ease-out-quart) both;
+  --animate-slide-up: rise 220ms var(--ease-out-quart) both;
+  --animate-dialog-in: dialog-in 180ms var(--ease-out-quart) both;
+  --animate-drawer-in: drawer-in 220ms var(--ease-out-quart) both;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes dialog-in {
+    from { opacity: 0; transform: translate(-50%, calc(-50% + 6px)) scale(0.985); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+  @keyframes drawer-in {
+    from { transform: translateX(-12px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes grow-x {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-white text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4 {
+    @apply text-ink;
+    letter-spacing: -0.012em;
+  }
+  /* One visible, consistent keyboard focus treatment. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-600;
+  }
+  ::selection {
+    @apply bg-blue-100 text-blue-900;
+  }
+  hr {
+    @apply border-rule;
+  }
+}
+
+@layer components {
+  /* Page header used across application routes. */
+  .page-title {
+    @apply text-[1.375rem] font-semibold leading-tight tracking-[-0.018em] text-ink;
+  }
+  .page-subtitle {
+    @apply mt-1 text-sm text-slate-500;
+  }
+  .section-title {
+    @apply text-sm font-semibold text-ink;
+  }
+  .meta {
+    @apply text-xs text-slate-500;
+  }
+
+  /* Editorial display face — marketing surfaces only. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+  }
+
+  /* Data tables: hairline rows, quiet headings, aligned numerals. */
+  .data-table {
+    @apply w-full border-collapse text-left text-[13px];
+  }
+  .data-table thead th {
+    @apply h-9 border-b border-rule bg-white px-3 text-xs font-medium whitespace-nowrap text-slate-500;
+  }
+  .data-table tbody td {
+    @apply border-b border-slate-100 px-3 py-2.5 align-middle text-slate-700;
+  }
+  .data-table tbody tr {
+    @apply transition-colors duration-100;
+  }
+  .data-table tbody tr:hover {
+    @apply bg-slate-50/70;
+  }
+  .data-table tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .data-table .num {
+    @apply text-right tabular-nums;
+  }
+
+  /* Status dot + label, used instead of filled pills in dense views. */
+  .status-dot {
+    @apply inline-block h-1.5 w-1.5 shrink-0 rounded-full;
+  }
+
+  /* Native select styled to match inputs. */
+  .select {
+    @apply h-9 w-full appearance-none rounded-md border border-slate-300 bg-white bg-no-repeat pr-8 pl-3 text-sm text-ink transition-colors hover:border-slate-400 focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/15;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2364748b' stroke-width='1.5' viewBox='0 0 12 12'%3E%3Cpath d='m3 4.5 3 3 3-3'/%3E%3C/svg%3E");
+    background-position: right 0.625rem center;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .bar-grow {
+    transform-origin: left;
+    animation: grow-x 600ms var(--ease-out-quart) both;
+  }
+  /* Scroll-linked reveal for marketing sections; static where unsupported. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

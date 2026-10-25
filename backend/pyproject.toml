@@ -1,0 +1,65 @@
+[project]
+name = "brightway-backend"
+version = "0.1.0"
+description = "Brightway Computer Academy management backend"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "psycopg[binary,pool]>=3.2",
+    "pyjwt[crypto]>=2.9",
+    "httpx>=0.27",
+    "python-multipart>=0.0.12",
+    "pillow>=11.0",
+    "fpdf2>=2.8",
+    "tzdata>=2026.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "pgserver>=0.1.4",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --import-mode=importlib"
+markers = [
+    "db: test needs a PostgreSQL database (TEST_DATABASE_URL)",
+    "live: test calls a live external sandbox API (opt-in with RUN_LIVE_TESTS=1)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "RUF"]
+# UP046/UP047: keep explicit typing.Generic for pydantic generic models.
+ignore = ["B008", "S101", "RUF012", "UP046", "UP047"]
+
+[tool.ruff.lint.per-file-ignores]
+# Repositories compose SQL from code-defined fragments only; every value is a bound parameter.
+"app/repositories/**" = ["S608"]
+# Fixed, non-secret credentials of the in-memory mock provider.
+"app/integrations/mock_payment.py" = ["S107"]
+"tests/**" = ["S105", "S106", "S107", "S108", "S311", "S608"]
+"scripts/**" = ["S603", "S607"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "."
+explicit_package_bases = true
+namespace_packages = true
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true

@@ -1,0 +1,53 @@
+2026-10-24 16:50:57.042 GMT [39236] LOG:  starting PostgreSQL 16.2 on x86_64-pc-mingw64, compiled by gcc.exe (x86_64-posix-seh-rev2, Built by MinGW-W64 project) 12.2.0, 64-bit
+2026-10-24 16:50:57.043 GMT [39236] LOG:  listening on IPv4 address "127.0.0.1", port 61178
+2026-10-24 16:50:57.123 GMT [28196] LOG:  database system was shut down at 2026-10-24 16:50:49 GMT
+2026-10-24 16:50:57.177 GMT [39236] LOG:  database system is ready to accept connections
+2026-10-24 16:55:57.100 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 16:57:46.765 GMT [39596] LOG:  checkpoint complete: wrote 1022 buffers (6.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=108.640 s, sync=0.985 s, total=109.665 s; sync files=448, longest=0.011 s, average=0.003 s; distance=5173 kB, estimate=5173 kB; lsn=0/19914E0, redo lsn=0/198F758
+2026-10-24 17:10:57.778 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 17:11:23.402 GMT [12996] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-10-24 17:12:27.205 GMT [39596] LOG:  checkpoint complete: wrote 823 buffers (5.0%); 0 WAL file(s) added, 0 removed, 1 recycled; write=89.148 s, sync=0.237 s, total=89.427 s; sync files=88, longest=0.009 s, average=0.003 s; distance=13475 kB, estimate=13475 kB; lsn=0/26B8460, redo lsn=0/26B8428
+2026-10-24 17:35:57.205 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 17:35:59.726 GMT [39596] LOG:  checkpoint complete: wrote 24 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.506 s, sync=0.008 s, total=2.521 s; sync files=13, longest=0.001 s, average=0.001 s; distance=2 kB, estimate=12127 kB; lsn=0/26B8CF8, redo lsn=0/26B8CC0
+2026-10-24 17:43:10.790 GMT [44676] ERROR:  DELETE on students is not allowed (data preservation rule)
+2026-10-24 17:43:10.790 GMT [44676] CONTEXT:  PL/pgSQL function public.prevent_modification() line 3 at RAISE
+2026-10-24 17:43:10.790 GMT [44676] STATEMENT:  
+	            DELETE FROM students
+	            WHERE id NOT IN (
+	                SELECT student_id FROM student_monthly_fees
+	                WHERE status = 'PAID' OR (amount_paise IS NOT NULL AND amount_paise > 0) OR paid_on IS NOT NULL
+	            );
+	        
+2026-10-24 17:45:57.719 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 17:45:59.804 GMT [39596] LOG:  checkpoint complete: wrote 20 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.054 s, sync=0.007 s, total=2.085 s; sync files=9, longest=0.002 s, average=0.001 s; distance=70 kB, estimate=10922 kB; lsn=0/26CA8C8, redo lsn=0/26CA890
+2026-10-24 17:50:57.814 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 17:50:58.489 GMT [39596] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.653 s, sync=0.007 s, total=0.675 s; sync files=2, longest=0.004 s, average=0.004 s; distance=31 kB, estimate=9833 kB; lsn=0/26D2548, redo lsn=0/26D2510
+2026-10-24 17:55:57.496 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 17:57:21.800 GMT [39596] LOG:  checkpoint complete: wrote 773 buffers (4.7%); 0 WAL file(s) added, 0 removed, 1 recycled; write=84.279 s, sync=0.012 s, total=84.305 s; sync files=24, longest=0.003 s, average=0.001 s; distance=11029 kB, estimate=11029 kB; lsn=0/3197A00, redo lsn=0/31979C8
+2026-10-24 18:15:57.796 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 18:15:57.913 GMT [39596] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.100 s, sync=0.003 s, total=0.118 s; sync files=1, longest=0.003 s, average=0.003 s; distance=6 kB, estimate=9926 kB; lsn=0/3199468, redo lsn=0/3199430
+2026-10-24 18:20:01.575 GMT [45492] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-10-24 18:20:01.575 GMT [13176] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-10-24 18:25:57.924 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 18:25:58.267 GMT [39596] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.328 s, sync=0.005 s, total=0.343 s; sync files=2, longest=0.003 s, average=0.003 s; distance=7 kB, estimate=8934 kB; lsn=0/319B288, redo lsn=0/319B250
+2026-10-24 18:38:04.496 GMT [31920] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-10-24 18:38:04.496 GMT [29012] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-10-24 18:38:04.496 GMT [32504] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-10-24 18:45:57.298 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 18:45:59.859 GMT [39596] LOG:  checkpoint complete: wrote 24 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.530 s, sync=0.013 s, total=2.561 s; sync files=19, longest=0.003 s, average=0.001 s; distance=68 kB, estimate=8048 kB; lsn=0/31AC2E0, redo lsn=0/31AC2A8
+2026-10-24 19:00:57.871 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 19:00:58.213 GMT [39596] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.330 s, sync=0.004 s, total=0.342 s; sync files=4, longest=0.003 s, average=0.001 s; distance=8 kB, estimate=7244 kB; lsn=0/31AE4A8, redo lsn=0/31AE470
+2026-10-24 19:05:57.219 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 19:05:57.364 GMT [39596] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.118 s, sync=0.008 s, total=0.146 s; sync files=2, longest=0.006 s, average=0.004 s; distance=8 kB, estimate=6520 kB; lsn=0/31B0610, redo lsn=0/31B05D8
+2026-10-24 19:15:57.377 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 19:15:57.484 GMT [39596] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.094 s, sync=0.005 s, total=0.108 s; sync files=2, longest=0.003 s, average=0.003 s; distance=8 kB, estimate=5869 kB; lsn=0/31B2778, redo lsn=0/31B2740
+2026-10-24 19:25:57.483 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 19:25:59.170 GMT [39596] LOG:  checkpoint complete: wrote 17 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.668 s, sync=0.011 s, total=1.687 s; sync files=16, longest=0.003 s, average=0.001 s; distance=73 kB, estimate=5289 kB; lsn=0/31C4E78, redo lsn=0/31C4E40
+2026-10-24 19:30:57.183 GMT [39596] LOG:  checkpoint starting: time
+2026-10-24 19:30:57.514 GMT [39596] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.317 s, sync=0.005 s, total=0.331 s; sync files=4, longest=0.002 s, average=0.002 s; distance=8 kB, estimate=4761 kB; lsn=0/31C7240, redo lsn=0/31C7208
