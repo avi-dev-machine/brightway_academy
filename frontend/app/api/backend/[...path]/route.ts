@@ -3,11 +3,48 @@ import { getValidAccessToken } from "@/lib/auth/server-session";
 
 const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000";
 
+const SAFE_SEGMENT_RE = /^[a-zA-Z0-9_.-]+$/;
+const SAFE_IDEMPOTENCY_RE = /^[a-zA-Z0-9_.:-]{1,128}$/;
+
 async function proxyRequest(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params;
+  if (!Array.isArray(path) || path.length === 0) {
+    return NextResponse.json(
+      { success: false, error: { code: "INVALID_PATH", message: "Invalid API route path." } },
+      { status: 400 },
+    );
+  }
+
+  // Defend against path traversal: every path segment must be strictly alphanumeric/dash/dot/underscore
+  for (const segment of path) {
+    if (!SAFE_SEGMENT_RE.test(segment) || segment === "." || segment === "..") {
+      return NextResponse.json(
+        { success: false, error: { code: "INVALID_PATH", message: "Disallowed path characters detected." } },
+        { status: 400 },
+      );
+    }
+  }
+
   const backendPath = path.join("/");
   const search = request.nextUrl.search;
   const targetUrl = `${API_BASE_URL}/api/v1/${backendPath}${search}`;
+
+  // SSRF defense: ensure target URL strictly matches backend origin
+  try {
+    const targetObj = new URL(targetUrl);
+    const baseObj = new URL(API_BASE_URL);
+    if (targetObj.origin !== baseObj.origin || !targetObj.pathname.startsWith("/api/v1/")) {
+      return NextResponse.json(
+        { success: false, error: { code: "FORBIDDEN_TARGET", message: "Target URL disallowed." } },
+        { status: 403 },
+      );
+    }
+  } catch {
+    return NextResponse.json(
+      { success: false, error: { code: "MALFORMED_URL", message: "Malformed backend URL." } },
+      { status: 400 },
+    );
+  }
 
   const token = await getValidAccessToken();
 
@@ -15,7 +52,11 @@ async function proxyRequest(request: NextRequest, { params }: { params: Promise<
   // Pass allowed incoming headers
   const allowedHeaders = ["content-type", "accept", "idempotency-key", "cache-control"];
   request.headers.forEach((value, key) => {
-    if (allowedHeaders.includes(key.toLowerCase())) {
+    const lowerKey = key.toLowerCase();
+    if (allowedHeaders.includes(lowerKey)) {
+      if (lowerKey === "idempotency-key" && !SAFE_IDEMPOTENCY_RE.test(value)) {
+        return; // drop malformed idempotency keys
+      }
       reqHeaders.set(key, value);
     }
   });

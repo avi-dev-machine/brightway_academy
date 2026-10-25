@@ -54,6 +54,7 @@ class RequestContextMiddleware:
                 headers.setdefault("Referrer-Policy", "no-referrer")
                 headers.setdefault("X-XSS-Protection", "1; mode=block")
                 headers.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+                headers.setdefault("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
                 if self.hsts:
                     headers.setdefault(
                         "Strict-Transport-Security", "max-age=31536000; includeSubDomains"
